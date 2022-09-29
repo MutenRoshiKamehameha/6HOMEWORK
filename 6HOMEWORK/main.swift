@@ -6,15 +6,19 @@
 //
 
 import Foundation
+
+
 //Переменные для общего чека
 var namesOfProducts = ""
 var pricesOfProducts1KG = ""
+
 var pricesOfPruducts = ""
 var creatorsOfProducts = ""
+
 var weightsOfProducts = ""
 var discountOfProducts = ""
-var NumberOfShoping = 0
 
+var NumberOfShoping = 0
 var totalCount:Float = 0
 
 
@@ -23,12 +27,19 @@ var discountProduct:Float = 0.0
 var priceProducts:Float = 0.0
 
 
-//Функция которая либо продолжает добавялять продукты(да), либо останавливается и принтует общий чек
+//Функция которая либо продолжает добавялять продукты(yes), либо останавливается и принтует общий чек(no)
 func addProducts(answer:String){
+    
+    
     if answer == "yes"{
+        
+        
     startToShop(move: move)
+        
 
     }else if answer == "no"{
+        
+        
         print("""
 
         Название продукта            \(namesOfProducts)
@@ -47,7 +58,11 @@ func addProducts(answer:String){
 
         """)
         print("Хорошо, спасибо за покупку, приходите еще")
+        
+        
     }else{
+        
+        
         print("""
 
         Название продукта            \(namesOfProducts)
@@ -71,26 +86,30 @@ func addProducts(answer:String){
 }
 
 
+
 //Функция которая принтует единичный чек
 func startToShop(move:String){
 
     if move == "yes" {
+        
+        
         func shop(name:String,price1kg:Float,creators:String,weight:Float,discount:Float){
 
             NumberOfShoping += 1
 
             if discount != 0 {
+                
                  priceProducts += (price1kg * weight)
                  discountProduct += (discount * 0.01)
                  priceProducts -= (priceProducts * discountProduct)
 
 
-
-
             }else if discount == 0 {
 
+                
                 priceProducts += (price1kg * weight)
 
+                
             }
             namesOfProducts += ("(\(NumberOfShoping)) \(name),")
             creatorsOfProducts += ("(\(NumberOfShoping)) \(creators),")
@@ -98,7 +117,7 @@ func startToShop(move:String){
             weightsOfProducts += ("(\(NumberOfShoping)) \(weight),")
             discountOfProducts += ("(\(NumberOfShoping)) \(discount),")
             pricesOfPruducts += ("(\(NumberOfShoping)) \(priceProducts),")
-           totalCount += priceProducts
+            totalCount += priceProducts
 
 
                 print("""
@@ -112,6 +131,8 @@ func startToShop(move:String){
 
         """)
             }
+        
+        
         print("Напишите название товара (обязательно):")
         let name = readLine()!
 
@@ -129,36 +150,72 @@ func startToShop(move:String){
 
         shop(name: name, price1kg: Float(price1kg) ?? 0, creators: creators,weight:Float(weight) ?? 0,
              discount:Float(discount) ?? 0)
+        
+        
 
         print("Добавить другой товар(yes/no)")
         let answer = readLine()!
             addProducts(answer: answer)
 
+        
+        
     }else if move == "no" {
+        
         print("Ну а зачем ты тогда в магаз пришел?")
+        
     }else{
+        
         print("Я вас не понял перезапустите консоль")
+        
     }
 }
+
 print("Здравствуйте, вы хотите что то купить? (yes/no)")
+
 let move = readLine()!
+
 startToShop(move: move)
+
+
+
+
+
+
 
 
 //2 задание с паролем и логином
 
 
+//массив с логинами куда добавляются логины
 var passwords:[String] = []
+
+//массив с паролями куда добавляются пароли
 var logins:[String] = []
+
+//массив с соц сетями
 var networks:[String] = ["Instagram","Telegram"]
 
+
+
+/*
+ Функция которая добавляет в массивы логины и пароли,
+если есть совпадение с паролями предупреждает об этом
+и предлагает ввести другой пароль
+ */
 func regInNetworks(log1:String,password1:String,log2:String,password2:String){
     
+    
+    
+//добавление логинов
     logins.append(log1)
     logins.append(log2)
+
     
+//первый пароль всегда добавляется
     passwords.append(password1)
+   
     
+//второй пароль проходит проверку
     if password2 == passwords[0]{
         
         print("""
@@ -168,7 +225,12 @@ func regInNetworks(log1:String,password1:String,log2:String,password2:String){
 вы можете ввести его или придумать другой
 
 """)
-       
+ 
+        
+/*
+если все такие есть совпадение запускается другая функция,
+которая в любом случае добавляет второй пароль
+*/
         func anotherPassword(password3:String){
             passwords.append(password3)
         }
@@ -202,6 +264,8 @@ regInNetworks(log1: log1, password1: password1, log2: log2, password2: password2
 
 
 print()
+
+//после ввода данных принтуются массивы с введенными данными
 print("Никому не говорите свои данные!")
 for (index,item) in logins.enumerated(){
     print("Приложение \(networks[index]): логин - \(item), пароль - \(passwords[index])")
